@@ -1,28 +1,39 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './Product.css'
-export default class Product extends Component {
+import { useStateValue } from "../../redux/StateProvider";
+
+function Product({id, title, price, rating, image}) {
+  const [ {basket}, dispatch] = useStateValue();
+
+  const addToBasket = () => {
+    dispatch({
+      type: "ADD_TO_BASKET",
+      item: {
+        id: id,
+        title: title,
+        image: image,
+        price: price,
+        rating: rating,
+      },
+    });
+  };
   
-  // eslint-disable-next-line
-  constructor(props) {
-      super(props)
-  }
-    
-  render() {
-    return (
-      <div className='product'>
-          <div className='product__info'>
-            <p>{this.props.title}</p>
-            <p>
-                <small>$</small>
-                <strong>{this.props.price}</strong>
-            </p>
-            <div className='product__rating'>
-                {Array(this.props.rating).fill().map((_,i) => ( '★ ' ))}
-            </div>
+  return (
+    <div className='product'>
+        <div className='product__info'>
+          <p>{title}</p>
+          <p>
+              <small>$</small>
+              <strong>{price}</strong>
+          </p>
+          <div className='product__rating'>
+              {Array(rating).fill().map((_,i) => ( '★ ' ))}
           </div>
-          <img alt='' className='product__img' src={this.props.image} />
-          <button className='product__addToCart'>Add to Cart</button>
-      </div>
-    )
-  }
+        </div>
+        <img alt='' className='product__img' src={image} />
+        <button onClick={addToBasket} className='product__addToCart'>Add to Cart</button>
+    </div>
+  )
 }
+
+export default Product;

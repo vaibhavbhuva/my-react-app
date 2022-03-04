@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Header.css';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import { Link } from 'react-router-dom';
+import { useStateValue } from "../../redux/StateProvider";
+import { getBasketItemsCount } from '../../redux/reducer';
+  
+  function Header() {
+    const [{ basket }] = useStateValue();
 
-export default class Header extends Component {
-    render() {
-      return (
+    return (
         <header className='header'>
-            <img className='header__logo' alt='' src='https://www.nicepng.com/png/full/16-167642_amazon-logo-amazon-logo-white-text.png' />
+            <Link to="/">
+                <img className='header__logo' alt='' src='https://www.nicepng.com/png/full/16-167642_amazon-logo-amazon-logo-white-text.png' />
+            </Link>
             <div className='header__search'>
                 <input type='search' name='q' className="header__searchInput" />
                 <SearchIcon className='header__searchIcon' />
@@ -25,13 +31,13 @@ export default class Header extends Component {
                     <span className='header_nav--lineOne'>Your</span>
                     <span className='header_nav--lineTwo'>Prime</span>
                 </div>
-                <div className='header__navBasket'>
+                <Link to="/checkout" className='header__navBasket'>
                     <ShoppingBasketIcon className='header__nav--lineOne header__nav--basketIcon' />
-                    <span className='header__nav--lineTwo header__basketCount'>0</span>
-                </div>
+                    <span className='header__nav--lineTwo header__basketCount'>{getBasketItemsCount(basket)}</span>
+                </Link>
             </div>
         </header>
       );
-    }
   }
   
+  export default Header
