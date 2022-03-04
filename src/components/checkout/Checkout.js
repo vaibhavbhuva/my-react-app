@@ -18,15 +18,16 @@ function Checkout() {
         <div className='checkout__left'>
             <h2 className='checkout__title'>
               Your Shopping Basket ({basket.length})
-              <a href='#' onClick={emptyBasketItems} > Clear Basket</a>
+              <span  onClick={emptyBasketItems} > Clear Basket</span>
             </h2>
             {basket.map(item => (
-              <CheckoutProduct
+              <CheckoutProduct key={item.id}
                 id={item.id}
                 title={item.title}
                 image={item.image}
                 price={item.price}
                 rating={item.rating}
+                quantity={item.quantity}
               />
           ))}
         </div>

@@ -27,8 +27,9 @@
     justify-content: space-between;
 }
 
-.checkout__title > a {
+.checkout__title > span {
     color: orange;
     font-size: 18px;
     font-weight: 700;
+    cursor: pointer;
 }

@@ -7,7 +7,7 @@ export const initialState = {
 
 // Selector
 export const getBasketTotal = (basket) => 
-  basket?.reduce((quantity, item) => (quantity + item.quantity) * item.price, 0);
+  basket?.reduce((quantity, item) => quantity + item.quantity * item.price, 0);
 
 export const getBasketItemsCount = (basket) => 
     basket?.reduce((quantity, cartItem) =>  quantity + cartItem.quantity, 0);  
@@ -30,7 +30,7 @@ const reducer = (state, action) => {
     case 'CLEAR_ITEM_FROM_CART':
       return {
         ...state,
-        basket: state.basket.filter(cartItem => cartItem.id !== action.item.id)
+        basket: state.basket.filter(cartItem => cartItem.id !== action.id)
       }
 
     case "REMOVE_FROM_BASKET":
