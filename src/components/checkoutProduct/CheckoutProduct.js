@@ -3,6 +3,7 @@ import './CheckoutProduct.css'
 import { useStateValue } from "../../redux/StateProvider";
 
 function CheckoutProduct(product) {
+  // eslint-disable-next-line
   const [{basket}, dispatch] = useStateValue();
   const removeFromBasket = () => {
     dispatch({
@@ -42,11 +43,13 @@ function CheckoutProduct(product) {
                   <small>$</small>
                   <strong>{product.price}</strong>
               </p>
+              {!product?.hideButton && (
               <div className='checkoutProduct__quantity'>
                 <span onClick={removeItemQuantity} className="minus">-</span>
                 <input type="text" onChange={handleChange} value={product.quantity} />
                 <span onClick={addItemQuantity} className="plus">+</span>
               </div>
+              )}
               {!product?.hideButton && (
                     <button onClick={removeFromBasket}>Remove from Basket</button>
                 )}

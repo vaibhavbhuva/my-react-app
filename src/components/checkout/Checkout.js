@@ -30,9 +30,10 @@ function Checkout() {
                 quantity={item.quantity}
               />
           ))}
+          {basket.length === 0 && <div className='emptyBlock'>Shopping Cart is empty!</div>}
         </div>
         <div className='checkout__right'>
-            <Subtotal />
+            {basket.length > 0 &&  <Subtotal />}
         </div>
     </div>
   )

@@ -28,6 +28,24 @@
   color: #61dafb;
 }
 
+.pageNotFound {
+  padding: 1rem 1rem;
+  max-width: 500px;
+  margin: 30px auto;
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.pageNotFound h2{
+  text-shadow: 0 1px 1px white;
+}
+
+.pageNotFound img {
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

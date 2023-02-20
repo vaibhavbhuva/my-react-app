@@ -5,10 +5,17 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { useStateValue } from "../../redux/StateProvider";
 import { getBasketItemsCount } from '../../redux/reducer';
+import { auth } from '../../firebase';
   
   function Header() {
-    const [{ basket }] = useStateValue();
-
+    const [{ basket, user }] = useStateValue();
+    
+    const handleAuthentication = () => {
+        if(user) {
+            auth.signOut();
+        }
+    }
+    
     return (
         <header className='header'>
             <Link to="/">
@@ -16,13 +23,19 @@ import { getBasketItemsCount } from '../../redux/reducer';
             </Link>
             <div className='header__search'>
                 <input type='search' name='q' className="header__searchInput" />
-                <SearchIcon className='header__searchIcon' />
+                <Link to="/products" className='header__searchIcon'>
+                    <SearchIcon />
+                </Link>
             </div>
             <div className='header__nav'>
-                <div className='header__navItem'>
-                    <span className='header__nav--lineOne'>Hello, Guest</span>
-                    <span className='header__nav--lineTwo'>Sign In</span>
-                </div>
+                <Link to={!user && "/login"} className='header__navItem'>
+                    <div className='header__navItem' onClick={handleAuthentication}>
+                        <span className='header__nav--lineOne'>Hello, {!user ? 'Guest' : user.email}</span>
+                        <span className='header__nav--lineTwo'>
+                        {user ? 'Sign Out' : 'Sign In' }
+                    </span>
+                    </div>
+                </Link>
                 <div className='header__navItem'>
                     <span className='header__nav--lineOne'>Returns</span>
                     <span className='header__nav--lineTwo'>& Orders</span>

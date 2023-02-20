@@ -3,7 +3,8 @@ import './Product.css'
 import { useStateValue } from "../../redux/StateProvider";
 
 function Product({id, title, price, rating, image}) {
-  const [ {basket}, dispatch] = useStateValue();
+  // eslint-disable-next-line
+  const [ {}, dispatch] = useStateValue();
 
   const addToBasket = () => {
     dispatch({
